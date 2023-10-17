@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
@@ -33,17 +34,16 @@ import com.dam.laprimera.ui.theme.LaPrimeraTheme
         text = "Numeros: ${miViewModel.getNumero()}",
         modifier = Modifier
             .padding(110.dp)
-            .offset(y = -30.dp)
-            .offset(x = 185.dp)
+            .offset(y = 225.dp)//Y = EJE VERTICAL
+            .offset(x = 35.dp)
     )
     //un boton para generar numeros aleatorios
     Button(
         onClick ={ miViewModel.crearRandom()},
         modifier = Modifier
             .padding(vertical = 360.dp, horizontal = 110.dp)
-
             .offset(y = 0.dp)
-            .offset(x = 100.dp)
+            .offset(x = 0.dp)
         //Usar paddin(vertical = 100) y el size para camboiar su tamaño
 
     ){
@@ -51,69 +51,19 @@ import com.dam.laprimera.ui.theme.LaPrimeraTheme
         Image(
             painter = painterResource(id = R.drawable.lagartojuancho),//FREESVG.ORG PARA DESCARGAR MAS
             contentDescription = "Generar numeros",
-            Modifier.padding(8.dp)
+            modifier = Modifier
+                .padding(4.dp)
+                .size(40.dp)
+
+
         )
         Text(text="Generar numeros")
         // campo de texto para rellenar
 
-
-
     }
+Login(miViewModel)
 
 }
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun Login(miViewModel: MyViewModel) {
-
-
-
-    Column {
-        // mostrar el contador de clics
-        TextButton(onClick = { miViewModel.contador()}) {
-            Text("CLICS: ${miViewModel.getContador()}")
-        }
-
-        // mientras no tecleamos mas de tres caracteres no se muestra el saludo
-        if (miViewModel.name.value.length > 3) {
-            Text(
-                text = "Nombre: ${miViewModel.getString()}!",
-                fontSize = 24.sp
-            )
-        }
-        // campo de texto para rellenar
-        OutlinedTextField(
-            value = miViewModel.getString(),
-            onValueChange = {
-                miViewModel.name.value = it
-            },
-            label = { Text(text = "Name") }
-        )
-
-    }
-
-}
-
-@Composable
-fun InterfazUsuario(){
-    login()
-    texto_descriptivo("Hola texto")
-    chat()
-}
-@Composable
-fun chat() {
-    TODO("Not yet implemented")
-}
-@Composable
-fun texto_descriptivo(texto:String) {
-    Text(text = texto)
-}
-
-@Composable
-fun login(){
-    texto_descriptivo(texto = "Fallo de login")
-}
-
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -122,6 +72,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     var name = remember {mutableStateOf("")}
 
     Row {
+
 
         Image(
             modifier = modifier.offset(y=50.dp),
@@ -171,6 +122,62 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
     }
 }
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Login(miViewModel: MyViewModel) {
+
+
+
+    Column {
+        // mostrar el contador de clics
+        TextButton(onClick = { miViewModel.contador()}) {
+            Text("CLICS: ${miViewModel.getContador()}")
+        }
+
+        // mientras no tecleamos mas de tres caracteres no se muestra el saludo
+        if (miViewModel.name.value.length > 3) {
+            Text(
+                text = "Nombre: ${miViewModel.getString()}!",
+                fontSize = 24.sp
+            )
+        }
+        // campo de texto para rellenar
+        OutlinedTextField(
+            value = miViewModel.getString(),
+            onValueChange = {
+                miViewModel.name.value = it
+            },
+            label = { Text(text = "Name") }
+        )
+
+    }
+
+}
+
+
+@Composable
+fun InterfazUsuario(){
+    login()
+    texto_descriptivo("Hola texto")
+    chat()
+}
+@Composable
+fun chat() {
+    TODO("Not yet implemented")
+}
+@Composable
+fun texto_descriptivo(texto:String) {
+    Text(text = texto)
+}
+
+@Composable
+fun login(){
+    texto_descriptivo(texto = "Fallo de login")
+}
+
+
 
 @Preview(showBackground = true)
 @Composable

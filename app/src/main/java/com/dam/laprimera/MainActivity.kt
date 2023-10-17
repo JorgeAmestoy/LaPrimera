@@ -54,9 +54,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),//para que me rellene toDDo el movil??
                     color = MaterialTheme.colorScheme.background
                 ) {
-                 Greeting(name)
+                 //Greeting(name)
                    InterfazUsuario2(miViewModel)//llamo a la variable en la que "guardé" la clase
-                    Login(miViewModel)
+
                 }
             }
         }
