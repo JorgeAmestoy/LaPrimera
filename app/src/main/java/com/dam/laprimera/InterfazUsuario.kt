@@ -1,5 +1,7 @@
 package com.dam.laprimera
+import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -19,49 +22,78 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dam.laprimera.ui.theme.LaPrimeraTheme
 @Composable
 fun IU3(miViewModel: MyViewModel){
-    // Fondo con la imagen
+
     Box(
         modifier = Modifier.fillMaxSize()
+
     ) {
-        Image(
+        Image(//FONDO DE PANTALLA DE OCEANO
+
             painter = painterResource(id = R.drawable.oceano),
             contentDescription = null, // Puedes establecer una descripción apropiada si es necesario
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
-        )
 
-        // Aquí agregas tus elementos de interfaz de usuario encima de la imagen de fondo
-        Text(
-            text = "Numeros: ${miViewModel.getNumerosRandom()}",
-            modifier = Modifier.offset(y = 225.dp).offset(x = 35.dp)
         )
-
-        Button(
-            onClick = { miViewModel.crearRandom() },
+        Button(//BOTON PARA GENERAR NUMEROS ALEATORIOS
+            onClick ={ miViewModel.crearRandom()},
             modifier = Modifier
-                .padding(vertical = 360.dp, horizontal = 110.dp)
-                .offset(y = 400.dp)
+                //.padding(vertical = 360.dp, horizontal = 110.dp)
+                .offset(y = 175.dp)
                 .offset(x = 0.dp)
-        ) {
-            // Contenido del botón
+
+
+        ){//PERSONALIZACIÓN DEL BOTÓN
+            Image(
+                painter = painterResource(id = R.drawable.lagartojuancho),//FREESVG.ORG PARA DESCARGAR MAS
+                contentDescription = "Generar numeros",
+                modifier = Modifier
+                    .padding(8.dp)
+                    .size(40.dp)
+
+            )
+            Text(text="Pulsa para generar numeros")
         }
 
-        // Otros elementos de interfaz de usuario, como el campo de texto
-    }
+        Text(//TEXTO DÓNDE APARECEN LOS NUMEROS ALEATORIOS AL PULSAR EL BOTÓN
 
-    // Otras partes de la interfaz de usuario
-    Login(miViewModel)
+            //text = "Numeros: ${miViewModel.getNumero()}",//llama al método que me devuelve un número random
+            text = "Numeros: ${miViewModel.getNumerosRandom()}",//llama al método que me devuelve laa lista de números random
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .offset(y = 250.dp)//Y = EJE VERTICAL
+                .offset(x = 20.dp)
+
+        )
+        Box(
+
+        ) {
+            Image(//FONDO DE PANTALLA DE OCEANO
+
+                painter = painterResource(id = R.drawable.pescador),
+                contentDescription = "pescador",
+                modifier = Modifier
+                    .offset(y = 168.dp)//Y = EJE VERTICAL
+                    .offset(x = 290.dp)
+
+            )
+        }
+
+    }
+    Login(miViewModel)// FUNCIÓN QUE TIENE PALABRA "CLICS" QUE GENERA NÚMERO CUANDO LE PULSO
 }
 
 @Composable
@@ -107,13 +139,48 @@ Login(miViewModel)
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-//Tiene las fotos de CHELO y PAISAJE
-    var msj_saludo = stringResource(id = R.string.saludo)
-    var name = remember {mutableStateOf("")}
+  //  var msj_saludo = stringResource(id = R.string.saludo)
+   // var name = remember {mutableStateOf("")}
 
+    Row(verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.End
+    ) {
+        Box{
+            Image(painter = painterResource(R.drawable.neil150),contentDescription = "icono")
+           /* Icon(
+                painter = painterResource(id = R.drawable.check),
+                contentDescription = "icono_check"
+            )*/
+        }
+        Column{
+            Text(
+                text = "Hola $name",
+                fontSize = 50.sp,
+                color = Color.Blue,
+                modifier = modifier
+            )
+            Text(
+                text = stringResource(R.string.saludo),
+                fontSize = 20.sp,
+                color = Color.Gray,
+                modifier = modifier
+
+            )
+
+            Button(onClick = { Log.d("Calcular", "Click!!!!") }) {
+                Text(text = "Click me!", color= Color.Yellow)
+            }
+
+
+
+
+        }
+        
+    }
+
+
+    /**
     Row {
-
-
         Image(
             modifier = modifier.offset(y=50.dp),
             painter = painterResource(R.drawable.chelo),
@@ -129,15 +196,13 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             )*/
 
         Column {
-
-
             Text(
                 text = "Chelo Garcia",
                 fontSize = 40.sp,
                 color = Color.Black,
                 modifier = modifier
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(50.dp))//Para separar el Text de arriba de la Image de abajo
             Image(
                 modifier = modifier.offset(y=50.dp),
                 painter = painterResource(R.drawable.chelo),
@@ -154,17 +219,12 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 painter = painterResource(R.drawable.estrellas),
                 contentDescription = "Estrellas"
             )
-            /*
+
             Button(onClick = { Log.d("calcular", "click!!!") }) {
                 Text(text = "Click me!!", color = Color.Yellow)
-            }*/
-
-
-
+            }
         }
-
-
-    }
+    }**/
 }
 
 
@@ -172,32 +232,30 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun Login(miViewModel: MyViewModel) {
 
-
-
     Column {
-        // mostrar el contador de clics
+        // BOTÓN DE TEXTO LLAMADO "CLICKS" QUE CUANDO PULSO GENERA NÚMERO
         TextButton(onClick = { miViewModel.contador()}) {
-            Text("CLICS: ${miViewModel.getContador()}")
+            Text("CLICKS: ${miViewModel.getContador()}")
         }
 
-        // mientras no tecleamos mas de tres caracteres no se muestra el saludo
-        if (miViewModel.name.value.length > 3) {
-            Text(
-                text = "Nombre: ${miViewModel.getString()}!",
-                fontSize = 24.sp
-            )
-        }
-        // campo de texto para rellenar
+        //CAJA DE TEXTO QUE SE PUEDE RELLENAR
         OutlinedTextField(
             value = miViewModel.getString(),
             onValueChange = {
                 miViewModel.name.value = it
             },
-            label = { Text(text = "Name") }
+            label = { Text(text = "Escribe") }
         )
 
-    }
+        // CONDICIONAL EN LA QUE SI ESCRIBO MÁS DE TRES LETRAS ME SALE NUEVO TEXTO DEBAJO
+        if (miViewModel.name.value.length > 3) {
+            Text(
+                text = "Nombre: ${miViewModel.getString()}",
+                fontSize = 24.sp
+            )
+        }
 
+    }
 }
 
 

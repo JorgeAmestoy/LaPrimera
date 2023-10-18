@@ -55,8 +55,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                  //Greeting(name)
-                  // InterfazUsuario2(miViewModel)//llamo a la variable en la que "guardé" la clase
-                    IU3(miViewModel)
+                  //InterfazUsuario2(miViewModel)//llamo a la variable en la que "guardé" la clase
+                   IU3(miViewModel)
                 }
             }
         }
