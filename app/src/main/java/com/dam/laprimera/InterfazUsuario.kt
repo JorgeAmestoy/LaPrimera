@@ -83,7 +83,7 @@ fun IU3(miViewModel: MyViewModel){
         ) {
             Image(//FONDO DE PANTALLA DE OCEANO
 
-                painter = painterResource(id = R.drawable.pescador),
+                painter = painterResource(id = R.drawable.pescador2),
                 contentDescription = "pescador",
                 modifier = Modifier
                     .offset(y = 168.dp)//Y = EJE VERTICAL
