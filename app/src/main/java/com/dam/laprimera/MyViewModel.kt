@@ -2,6 +2,7 @@ package com.dam.laprimera
 
 import android.util.Log
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -29,6 +30,7 @@ class MyViewModel() : ViewModel() {
     // con el = necesitamos utilizar value
     var counter = mutableStateOf(0)
     var name =mutableStateOf("")
+    val listaRandom = mutableStateListOf<Int>()
 
 
     //Inicializamos variable cuando instanciamos
@@ -38,20 +40,30 @@ class MyViewModel() : ViewModel() {
         Log.d(TAG_LOG, "Inicializamos ViewModel")
     }
 
-
-
     /**
      * Queremos que un numero entero se cree aleatoriamente
      */
-    fun crearRandom() {
-        _numbers.value = (0..10).random()
-        Log.d(TAG_LOG, "creamos random ${_numbers.value}")
+    fun crearRandom(){
+        _numbers.value = (0..3).random()
+      //  val numeroAleatorio = (0..3).random()
+        listaRandom.add(_numbers.value)
+
+        //Log.d(TAG_LOG, "creamos random ${_numbers.value}")
+        Log.d(TAG_LOG, "Añado el ${_numbers.value}")
+        for(numero in listaRandom){
+            Log.d(TAG_LOG," Lista de números random: $numero")
+        }
+
     }
     /**
      * Devuelve el número aleatorio
      */
-    fun getNumero(): Int {//nos devuelve la clase Int, en Kotlin no hay valores primitivos
+    fun getNumero(): Int {//nos devuelve la clase Int. En Kotlin no hay valores primitivos
         return _numbers.value
+    }
+
+    fun getNumerosRandom(): List<Int>{
+        return listaRandom.toList()
     }
 
     fun contador(){
