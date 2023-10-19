@@ -33,6 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dam.laprimera.ui.theme.LaPrimeraTheme
+
+
 @Composable
 fun IU3(miViewModel: MyViewModel){
 
@@ -78,22 +80,31 @@ fun IU3(miViewModel: MyViewModel){
                 .offset(x = 20.dp)
 
         )
-        Box(
 
-        ) {
-            Image(//FONDO DE PANTALLA DE OCEANO
-
-                painter = painterResource(id = R.drawable.pescador2),
-                contentDescription = "pescador",
-                modifier = Modifier
-                    .offset(y = 168.dp)//Y = EJE VERTICAL
-                    .offset(x = 290.dp)
-
-            )
-        }
 
     }
-    Login(miViewModel)// FUNCIÓN QUE TIENE PALABRA "CLICS" QUE GENERA NÚMERO CUANDO LE PULSO
+    Login(miViewModel)// FUNCIÓN QUE TIENE PALABRA "CLICKS" QUE GENERA NÚMERO CUANDO LE PULSO
+    Pictures(miViewModel)
+}
+@Composable
+fun Pictures(miViewModel: MyViewModel){
+
+    Box(
+
+    ) {
+        Image(//FONDO DE PANTALLA DE OCEANO
+
+            painter = painterResource(id = R.drawable.pescador2),
+            contentDescription = "pescador",
+            modifier = Modifier
+                .offset(y = 168.dp)//Y = EJE VERTICAL
+                .offset(x = 290.dp)
+                .size(100.dp)
+
+        )
+    }
+
+
 }
 
 @Composable
@@ -233,6 +244,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun Login(miViewModel: MyViewModel) {
 
     Column {
+
         // BOTÓN DE TEXTO LLAMADO "CLICKS" QUE CUANDO PULSO GENERA NÚMERO
         TextButton(onClick = { miViewModel.contador()}) {
             Text("CLICKS: ${miViewModel.getContador()}")
@@ -280,7 +292,9 @@ fun login(){
 }
 
 
-
+/**
+ * Vista previa de la app
+ */
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {

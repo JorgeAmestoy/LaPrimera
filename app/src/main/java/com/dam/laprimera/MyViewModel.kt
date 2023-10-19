@@ -45,6 +45,7 @@ class MyViewModel() : ViewModel() {
      */
     fun crearRandom(){
         _numbers.value = (0..3).random()
+      //  _numbers.value = (0..10).random()
       //  val numeroAleatorio = (0..3).random()
         listaRandom.add(_numbers.value)
 
@@ -55,25 +56,38 @@ class MyViewModel() : ViewModel() {
         }
 
     }
+
     /**
-     * Devuelve el número aleatorio
+     * Devuelve número aleatorio
      */
     fun getNumero(): Int {//nos devuelve la clase Int. En Kotlin no hay valores primitivos
         return _numbers.value
     }
 
+    /**
+     * Devuelve lista de numeros aleatorios
+     */
     fun getNumerosRandom(): List<Int>{
         return listaRandom.toList()
     }
 
+    /**
+     *
+     */
     fun contador(){
         counter.value++
     }
 
+    /**
+     *
+     */
     fun getContador():Int{
         return counter.value
     }
 
+    /**
+     *
+     */
     fun getString(): String{
         return name.value
     }
