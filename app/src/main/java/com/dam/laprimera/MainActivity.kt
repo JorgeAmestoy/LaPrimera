@@ -41,12 +41,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {//Es como la Main de Java
         super.onCreate(savedInstanceState)
-        /**
-         * Inicializo la clase ViewModel, como el new en Java.
-         */
+
+
         val miViewModel: MyViewModel = MyViewModel()//Inicializo la clase ViewModel, como el new en Java.
 
         setContent {//Para mostrar lo que queremos en la pantalla del móvil
+
             LaPrimeraTheme {//Para definir la apariencia y el estilo de la interfaz
 
                 Surface(//Representa una superficie de la interfaz. Pasando cursor, nos pone las propiedades permitidas (color..)
@@ -59,10 +59,11 @@ class MainActivity : ComponentActivity() {
                   //Greeting(name)
                   //InterfazUsuario2(miViewModel)
                    IU3(miViewModel)//Llamo a IU3 con una instancia de ViewModel como argumento
+
+
                 }
             }
         }
-
         Log.d(TAG, "Estoy en on Create")
     }
 

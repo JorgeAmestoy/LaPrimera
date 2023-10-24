@@ -49,7 +49,7 @@ fun IU3(miViewModel: MyViewModel){
         Image(//FONDO DE PANTALLA DE OCEANO
 
             painter = painterResource(id = R.drawable.oceano),
-            contentDescription = null, // Puedes establecer una descripción apropiada si es necesario
+            contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
 
@@ -62,7 +62,7 @@ fun IU3(miViewModel: MyViewModel){
                 .offset(x = 0.dp)
 
 
-        ){//PERSONALIZACIÓN DEL BOTÓN
+        ){//PERSONALIZACIÓN DEL BOTÓN(foto lagartoJuancho...)
             Image(
                 painter = painterResource(id = R.drawable.lagartojuancho),//FREESVG.ORG PARA DESCARGAR MAS
                 contentDescription = "Generar numeros",
@@ -74,7 +74,7 @@ fun IU3(miViewModel: MyViewModel){
             Text(text="Pulsa para generar numeros")
         }
 
-        Text(//TEXTO DÓNDE APARECEN LOS NUMEROS ALEATORIOS AL PULSAR EL BOTÓN
+        Text(//TEXTO DONDE APARECEN LOS NUMEROS ALEATORIOS AL PULSAR EL BOTÓN
 
             //text = "Numeros: ${miViewModel.getNumero()}",//llama al método que me devuelve un número random
             text = "Numeros: ${miViewModel.getNumerosRandom()}",//llama al método que me devuelve la lista de números random
@@ -89,6 +89,7 @@ fun IU3(miViewModel: MyViewModel){
     }
     Login(miViewModel)// FUNCIÓN QUE TIENE PALABRA "CLICKS" Y LA CAJA DE TEXTO
     Picture(miViewModel)//FUNCIÓN QUE TIENE LA FOTO DEL NIÑO PESCADOR
+
 }
 
 /**
@@ -108,12 +109,12 @@ fun Picture(miViewModel: MyViewModel){
                 .offset(y = 155.dp)//Y = EJE VERTICAL
                 .offset(x = 290.dp)//X = EJE HORIZONTAL
                 .size(100.dp)
-
         )
 
     }
 
 }
+
 
 /**
  * CLICKS Y CAJA DE TEXTO
@@ -131,11 +132,11 @@ fun Login(miViewModel: MyViewModel) {
 
         //CAJA DE TEXTO QUE SE PUEDE RELLENAR
         OutlinedTextField(
-            value = miViewModel.getString(),
-            onValueChange = {
+            value = miViewModel.getString(),//Coge el valor de lo que escriba dentro de la caja de texto
+            onValueChange = {//Lo actualiza a medida que lo escribo
                 miViewModel.name.value = it
             },
-            label = { Text(text = "Escribe") }
+            label = { Text(text = "Escribe") }//Palabra que aparece dentro de la caja y que al escribir se pone como titulo
         )
 
         // CONDICIONAL EN LA QUE SI ESCRIBO MÁS DE TRES LETRAS ME SALE NUEVO TEXTO DEBAJO
@@ -149,13 +150,25 @@ fun Login(miViewModel: MyViewModel) {
     }
 }
 
+/**
+ * Vista previa de la app
+ */
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    LaPrimeraTheme {
+        IU3(miViewModel = MyViewModel())
+    }
+}
+
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
   //  var msj_saludo = stringResource(id = R.string.saludo)
    // var name = remember {mutableStateOf("")}
 
-    Row(verticalAlignment = Alignment.CenterVertically,
+    Row(verticalAlignment = Alignment.CenterVertically,//Para centrar verticalmente
         horizontalArrangement = Arrangement.End
     ) {
         Box{
@@ -190,17 +203,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 }
 
 
-/**
- * Vista previa de la app
- */
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    LaPrimeraTheme {
-        IU3(miViewModel = MyViewModel())
-    }
-}
-
 @Composable
 fun InterfazUsuario(){
     login()
@@ -220,6 +222,11 @@ fun texto_descriptivo(texto:String) {
 fun login(){
     texto_descriptivo(texto = "Fallo de login")
 }
+
+
+
+
+
 
 
 /**
