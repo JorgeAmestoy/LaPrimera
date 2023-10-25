@@ -1,6 +1,7 @@
 package com.dam.laprimera
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dam.laprimera.ui.theme.LaPrimeraTheme
+import java.time.format.TextStyle
 
 /**
  * miViewModel es una instancia de la clase MyViewModel,
@@ -89,6 +92,7 @@ fun IU3(miViewModel: MyViewModel){
     }
     Login(miViewModel)// FUNCIÓN QUE TIENE PALABRA "CLICKS" Y LA CAJA DE TEXTO
     Picture(miViewModel)//FUNCIÓN QUE TIENE LA FOTO DEL NIÑO PESCADOR
+    Juego(miViewModel)//FUNCIÓN QUE TIENE EL JUEGO SIMON DICE
 
 }
 
@@ -113,6 +117,135 @@ fun Picture(miViewModel: MyViewModel){
 
     }
 
+}
+
+/**
+ * FUNCION DEL JUEGO QUE
+ * TIENE LOS BOTONES Y SUS FUNCIONES
+ */
+@Composable
+fun Juego(miViewModel: MyViewModel){
+    Box{
+
+        if(miViewModel.getContador()<10){
+            Text("Rondas: ${miViewModel.getContador()}",
+                modifier = Modifier
+                    .offset(y = 350.dp)
+                    .offset(x = 55.dp),
+                fontSize = 25.sp
+            )
+
+        }else{
+            Text("Rondas: ${miViewModel.getContador()}",
+                modifier = Modifier
+                    .offset(y = 350.dp)
+                    .offset(x = 55.dp),
+                fontSize = 40.sp)
+        }
+    
+        Button(//BOTON AZUL
+            onClick ={},
+            modifier = Modifier
+                //.padding(vertical = 360.dp, horizontal = 110.dp)
+                .offset(y = 400.dp)
+                .offset(x = 50.dp)
+                .size(100.dp)
+                .background(Color.Blue)
+
+
+        ){
+
+        }
+        Button(//BOTON ROJO
+            onClick ={},
+            modifier = Modifier
+                //.padding(vertical = 360.dp, horizontal = 110.dp)
+                .offset(y = 550.dp)
+                .offset(x = 50.dp)
+                .size(100.dp)
+                .background(Color.Red)
+
+
+        ){
+
+        }
+        Button(//BOTON VERDE
+            onClick ={ miViewModel.crearRandom()},
+            modifier = Modifier
+                //.padding(vertical = 360.dp, horizontal = 110.dp)
+                .offset(y = 400.dp)
+                .offset(x = 200.dp)
+                .size(100.dp)
+                .background(Color.Green)
+
+
+        ){
+
+        }
+        Button(//BOTON AMARILLO
+            onClick ={},
+            modifier = Modifier
+                //.padding(vertical = 360.dp, horizontal = 110.dp)
+                .offset(y = 550.dp)
+                .offset(x = 200.dp)
+                .size(100.dp)
+                .background(Color.Yellow)
+
+
+        ){
+
+        }
+
+
+        Button(//BOTON PLAY
+            onClick ={ miViewModel.contador()},
+            modifier = Modifier
+                //.padding(vertical = 360.dp, horizontal = 110.dp)
+                .offset(y = 673.dp)
+                .offset(x = 220.dp)
+                .size(70.dp)
+
+
+
+        ){
+            Image(
+                painter = painterResource(id = R.drawable.play),//FREESVG.ORG PARA DESCARGAR MAS
+                contentDescription = "Generar numeros",
+                modifier = Modifier
+                    .size(40.dp)
+
+            )
+
+        }
+
+        botonStart()
+
+    }//Cierra la Box
+
+}
+
+/**
+ * FUNCION QUE CUANDO PULSO BOTON START
+ * CAMBIA LA PALABRA POR RESET
+ */
+@Composable
+fun botonStart() {
+    var start = remember { mutableStateOf(true) }
+
+    Button(
+        onClick = {
+            start.value = ! start.value
+        },
+        modifier = Modifier
+            .offset(y = 680.dp)
+            .offset(x = 65.dp)
+            .size(100.dp, 60.dp)
+    ) {
+        Text(
+            text = if (start.value) "START" else "RESET",
+            fontWeight = FontWeight.Bold
+        )
+    }
 }
 
 
@@ -160,170 +293,3 @@ fun GreetingPreview() {
         IU3(miViewModel = MyViewModel())
     }
 }
-
-
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-  //  var msj_saludo = stringResource(id = R.string.saludo)
-   // var name = remember {mutableStateOf("")}
-
-    Row(verticalAlignment = Alignment.CenterVertically,//Para centrar verticalmente
-        horizontalArrangement = Arrangement.End
-    ) {
-        Box{
-            Image(painter = painterResource(R.drawable.neil150),contentDescription = "icono")
-           /* Icon(
-                painter = painterResource(id = R.drawable.check),
-                contentDescription = "icono_check"
-            )*/
-        }
-        Column{
-            Text(
-                text = "Hola $name",
-                fontSize = 50.sp,
-                color = Color.Blue,
-                modifier = modifier
-            )
-            Text(
-                text = stringResource(R.string.saludo),
-                fontSize = 20.sp,
-                color = Color.Gray,
-                modifier = modifier
-
-            )
-
-            Button(onClick = { Log.d("Calcular", "Click!!!!") }) {
-                Text(text = "Click me!", color= Color.Yellow)
-            }
-        }
-        
-    }
-
-}
-
-
-@Composable
-fun InterfazUsuario(){
-    login()
-    texto_descriptivo("Hola texto")
-    chat()
-}
-@Composable
-fun chat() {
-    TODO("Not yet implemented")
-}
-@Composable
-fun texto_descriptivo(texto:String) {
-    Text(text = texto)
-}
-
-@Composable
-fun login(){
-    texto_descriptivo(texto = "Fallo de login")
-}
-
-
-
-
-
-
-
-/**
- * PRIMER GREETING
- */
-/**
-Row {
-Image(
-modifier = modifier.offset(y=50.dp),
-painter = painterResource(R.drawable.chelo),
-contentDescription = "Icono"
-)
-/*
-Text(
-//Atributos separados por coma
-text = msj_saludo,
-fontSize = 50.sp,
-color = Color.Blue,
-modifier = modifier
-)*/
-
-Column {
-Text(
-text = "Chelo Garcia",
-fontSize = 40.sp,
-color = Color.Black,
-modifier = modifier
-)
-Spacer(modifier = Modifier.height(50.dp))//Para separar el Text de arriba de la Image de abajo
-Image(
-modifier = modifier.offset(y=50.dp),
-painter = painterResource(R.drawable.chelo),
-contentDescription = "Icono"
-)
-Text(
-text = "3 minutes ago",
-fontSize = 20.sp,
-color = Color.Black,
-modifier = modifier
-)
-Spacer(modifier = Modifier.height(16.dp))
-Image(
-painter = painterResource(R.drawable.estrellas),
-contentDescription = "Estrellas"
-)
-
-Button(onClick = { Log.d("calcular", "click!!!") }) {
-Text(text = "Click me!!", color = Color.Yellow)
-}
-}
-}**/
-
-
-
-/**
- * INTERFAZ USUARIO 2
- */
-/*
-@Composable
-fun InterfazUsuario2(miViewModel: MyViewModel){//llamo a la clase creada MyViewModel. Luego en la main, la paso por aprametro cuando llame
-
-//Esta interfaz tiene el BOTON y el texto NUMEROS
-    Text(
-        //text = "Numeros: ${miViewModel.getNumero()}",
-        text = "Numeros: ${miViewModel.getNumerosRandom()}",
-        modifier = Modifier
-            .offset(y = 225.dp)//Y = EJE VERTICAL
-            .offset(x = 35.dp)
-    )
-
-    //un boton para generar numeros aleatorios
-    Button(
-        onClick ={ miViewModel.crearRandom()},
-        modifier = Modifier
-            .padding(vertical = 360.dp, horizontal = 110.dp)
-            .offset(y = 400.dp)
-            .offset(x = 0.dp)
-        //Usar paddin(vertical = 100) y el size para camboiar su tamaño
-
-    ){
-
-        Image(
-            painter = painterResource(id = R.drawable.lagartojuancho),//FREESVG.ORG PARA DESCARGAR MAS
-            contentDescription = "Generar numeros",
-            modifier = Modifier
-                .padding(4.dp)
-                .size(40.dp)
-
-
-        )
-
-        Text(text="Generar numeros")
-        // campo de texto para rellenar
-
-    }
-    Login(miViewModel)
-
-}
-*/
-
