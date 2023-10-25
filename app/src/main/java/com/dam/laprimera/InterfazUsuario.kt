@@ -29,6 +29,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,7 +42,7 @@ import com.dam.laprimera.ui.theme.LaPrimeraTheme
  */
 @Composable
 fun IU3(miViewModel: MyViewModel){
-
+    val randomData = miViewModel.randomData.value
     Box(
         modifier = Modifier.fillMaxSize()
 
@@ -54,13 +55,16 @@ fun IU3(miViewModel: MyViewModel){
             modifier = Modifier.fillMaxSize()
 
         )
-        Button(//BOTON PARA GENERAR NUMEROS ALEATORIOS
-            onClick ={ miViewModel.crearRandom()},
-            modifier = Modifier
-                //.padding(vertical = 360.dp, horizontal = 110.dp)
-                .offset(y = 175.dp)
-                .offset(x = 0.dp)
+        Button(
+            modifier = Modifier.offset(x=50.dp, y=100.dp),
 
+            onClick = {
+                if (randomData.randomNumber != 0) {
+                    miViewModel.reset()
+                } else {
+                    miViewModel.crearRandom()
+                }
+            }
 
         ){//PERSONALIZACIÓN DEL BOTÓN(foto lagartoJuancho...)
             Image(
@@ -74,21 +78,24 @@ fun IU3(miViewModel: MyViewModel){
             Text(text="Pulsa para generar numeros")
         }
 
-        Text(//TEXTO DONDE APARECEN LOS NUMEROS ALEATORIOS AL PULSAR EL BOTÓN
-
-            //text = "Numeros: ${miViewModel.getNumero()}",//llama al método que me devuelve un número random
-            text = "Numeros: ${miViewModel.getNumerosRandom()}",//llama al método que me devuelve la lista de números random
+        Text(
+            text = "Random Number: ${randomData.randomNumber}",
             fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .offset(y = 250.dp)//Y = EJE VERTICAL
-                .offset(x = 20.dp)//X = EJE HORIZONTAL
+            fontSize = 24.sp,
+            textAlign = TextAlign.Center
 
+        )
+        Text(
+            text = "\n\n\n${randomData.randomNumbersList.joinToString(", ")}",
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+            textAlign = TextAlign.Center
         )
 
 
     }
-    Login(miViewModel)// FUNCIÓN QUE TIENE PALABRA "CLICKS" Y LA CAJA DE TEXTO
-    Picture(miViewModel)//FUNCIÓN QUE TIENE LA FOTO DEL NIÑO PESCADOR
+   // Login(miViewModel)// FUNCIÓN QUE TIENE PALABRA "CLICKS" Y LA CAJA DE TEXTO
+   // Picture(miViewModel)//FUNCIÓN QUE TIENE LA FOTO DEL NIÑO PESCADOR
 
 }
 
